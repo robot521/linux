@@ -1,0 +1,21 @@
+Redhat,centos使用rpm包。rpm + yum
+
+rpm单包安装：
+安装rpm -ivh xxx.rpm
+卸载 rpm -evh xxx.rpm
+查看已安装的包 rpm -qa
+反查文件（命令）的源包: rpm -qf /usr/bin/ls
+
+Yum库安装：
+更新yum库缓存：yum makecache	
+添加yum源：vim /etc/yum.repos.d/base.repo
+
+删除软件并清除配置文件：yum erase xxx
+
+Debian,ubuntu使用deb包。dpkg + apt-get
+Dpkg -i
+Dpkg -r -L -s
+
+查看deb包内容:dpkg -c
+
+Debain更新源位置: /etc/apt/source.list

@@ -1,0 +1,41 @@
+查看文本行数：nl 	
+
+Head -n 3 
+
+实时监控文本底部内容（监控日志）  tail -f	
+
+查看文件/文件夹大小: du -h aa.php
+
+ls
+-a 	
+--full-time
+
+cp
+-a == -dr
+-d:复制链接文件的源文件属性非标签属性
+-r :递归复制文件夹
+-i：提醒是否覆盖与目标重名的文件
+-p：复制源文件的属性非默认属性，常用备份
+
+文件时间：
+Mtime:更改文件内容的时间
+Ctime:更改文件权限属性的时间
+Atime:最近一次读取文件的时间
+
+文件搜索：find,locate
+命令搜索：which,whereis
+文件内容搜索:grep
+
+find:
+-name -iname(不区分大小写)
+通配符 * ?
+-size +超过 -不超过
+-user -group
+-amin（访问） -cmin（修改权限） -mmin（修改内容）
+-type f d l
+-inum
+-a(and) -o(or)
+-exec/-ok {} \;
+
+命令模式挂载:
+mount 设备位置 挂载点

@@ -1,0 +1,32 @@
+文件系统管理;
+查看磁盘分区情况: df -h /
+
+统计目录及文件大小： du -sh /etc/
+
+系统分区修复: fask -y /dev/sda2 //自动修复
+
+光盘挂载：mount /dev/cdrom(sr0)  /mnt/cdrom
+                   umonut
+手动分区：fdisk -l //查看分区
+重新加载分区表：partprobe
+格式化分区:mkfs -t ext4 /dev/sdb1
+设置开机自动挂载：vim /etc/fstab
+U盘挂载：mount -t vfat /dev/sdb1 /mnt/usb
+
+
+光盘刻录工具：cdrecord
+备份：xfsdump        /       dd if=/etc/passwd of=/tmp/passwd.back
+
+
+设置别名：alias ju='jupyter-notebook --allow-root'
+永久生效：写入/root/.bashrc,并source .bashrc
+
+显示当前系统登录用户： w
+
+显示当前tcp连接的端口情况:netstat -nltp
+
+查看本机开放端口:netstat -ltun
+
+查看网关路由表:netstat -rn
+
+

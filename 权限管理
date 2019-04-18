@@ -1,0 +1,41 @@
+切换用户： su （认证root密码）
+
+持续使用root操作：sudo -s (认证当前用户密码)
+
+添加可执行sudo用户白名单： vi /etc/sudoers	
+
+添加管理员： useradd -o -u 0 robot
+提升至管理员: usermod -o -u 0 robot
+
+增加隐藏属性：
+chattr: +a,只能新增数据。
++i,锁定文件，不能更改文件。作用与文件夹，只能修改文件内容，不能增删文件.
+lsattr：查看隐藏属性
+
+修改文件的默认权限:umask
+umask u=x：取消user的x权限
+
+特殊权限:
+chmod u+s 123.txt
+chmod g+s 123.txt
+SUID:-rws-----x，若执行者具有此二进制文件的x，则以拥有者所有的权限运行。//suid仅对二进制文件有效。
+SGID:-----s--x。作用于文件.与suid相同。作用于文件夹，
+当用户对某一目录有写和执行权限时，该用户就可以在该目录下建立文件，如果该目录用 SGID 修饰，则该用户在这个目录下建立的文件都是属于这个目录所属的组。
+SBIT：--------t,仅作用于文件夹，表示仅有自己和 root 才有权力删除。
+VIM提权：设置vim SUID , vim passwd, 修改uid为0。
+
+添加/移除单一用户进多个组：
+Usermod -a -G group user
+Usermod -d -G group user
+
+设置acl权限：
+setfacl -m u:user:rw test(文件夹)
+setfacl -m u:user:rw -R test(文件夹)(递归)
+setfacl -m g:group:wx group（用户组）
+setfacl -m d:u:user:rw test(文件夹)(默认值)
+
+查看acl权限：
+getfacl test
+删除acl权限：
+setfacl -x u:user test(文件夹)
+setfacl -b test
