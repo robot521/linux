@@ -1,0 +1,57 @@
+OpenSSh:
+    C/S
+        C: ssh, scp, sftp, xshell, putty
+        S:sshd
+                                  
+    ssh,配置文件:/etc/ssh/ssh_config
+    
+    sshd, 配置文件:/etc/ssh/sshd_config
+    
+    生成密钥对：
+    ssh-keygen
+    发送公钥:
+   ssh-copy-id -i id_rsa.pub root@123.123
+   
+   登录日志: /var/log/secure
+
+允许和禁止制定用户ssh登录
+vim /etc/ssh/sshd_conf
+AllowUsers    aliyun test@192.168.1.1 
+DenyUsers    zhangsan aliyun
+
+
+
+禁止root ssh登录
+vim /etc/ssh/sshd_conf
+#PermitRootLogin prohibit-password
+
+添加sudo用户
+/etc/sudoers
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+
+
+
+
+
+ssl：
+创建私有CA：
+openssl配置文件：/etc/pki/tls/openssl.conf
+
+1.创建所需文件
+    touch index.txt
+    echo 01 > serial
+2. CA自签证书
+    (umask 077; openssl genrsa -out /etc/pki/CA/private/cakey.pem 2048)
+    openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -days 700 -out /etc/pki/CA/cacert.pem
+       -x509:专用于CA生成自签证书
+3.发证
+    1.生成证书请求：
+        (umask 077; openssl genrsa -out /etc/httpd/ssl/httpd.key 2048)
+         openssl req -new -key /etc/httpd/ssl/httpd.key -days 333 -out /etc/httpd/ssl/httpd.csr
+    2.把请求发送到CA服务器
+    3.CA服务器签发证书并发送到请求者：
+        openssl ca -in /tmp/httpd.csr -out /etc/pki/CA/certs/httpd.crt
+
+查看证书信息：
+    openssl x509 -in /etc/asd.cert -noout -text

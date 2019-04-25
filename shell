@@ -1,5 +1,5 @@
 输入输入重定向：
-    date >> 1.txt 2>&1         date >> /etc/null 2>&1
+    date >> 1.txt 2>&1         date >> /dev/null 2>&1
 date >> 1.txt 2>>2.txt
 
 
@@ -32,3 +32,137 @@ expr,let数值运算工具
 a=1
 b=2
 cc=$(expr $a + $b)
+
+
+
+
+在子shell中执行sh脚本：
+bash bash.sh
+./bash.sh
+
+在当前shell执行sh脚本：
+. bash.sh
+source bash.sh
+
+
+
+与shell相关的配置文件：
+全局(系统级别,作用与登录时)：
+/etc/profile
+/etc/bashrc
+
+当前局部（用户级别）：
+作用于登录时：
+~/.bash_profile
+~/.bashrc
+作用于登出时：
+~/.bash_logout
+~/.bash_history
+
+
+
+bash的种类：
+login shell:  su - robot /etc/profile
+         /etc/bashrc
+         ~/.bash_profile
+         ~/.bashrc
+
+
+
+nologin shell: su robot    /etc/bashrc
+          ~/.bashrc 
+
+
+
+bash特点：
+1.tab的命令，文件补齐
+
+2.history:
+上下键，
+!nu,
+!string,
+!$(上一条命令的最后一个参数),
+!!（上一条命令）
+
+3，别名   
+alias，
+unalias,
+\命令（跳过别名），
+～/.bashrc(永久生效)
+
+4.快捷键：ctrl+R(搜索历史命令)，
+ctrl+D(退出当前shell)，
+ctrl+A(光标移动到最前),
+ctrl+E(光标移动到最后)，
+ctrl+K(删除光标之后的内容）
+ctrl+U（删除光标之前的内容）
+
+5.会话管理，前后台工作
+& 后台工作，退出终端后台命令结束
+nohub  nohub sleep 10 & 后台工作，退出终端命令继续执行 
+bg + 进程号 放入后台
+fg +进程号 调用后台工作到前台终端
+screen  -S(定义一个回话名称)
+   -ls（查看所有的会话）
+   -r 1234 （回到1234回话）
+   ctrl+a d(隐藏当前回话窗口)
+   ctrl+a w（查看当前所有窗口）
+
+6.输入输出重定向
+0(标准输入) < <<
+1（标准输出） > >> 
+2（标准错误输出） 2> 2>>
+date >> 1.txt 2>&1(同时保存正确和错误的输出)
+date &>> 1.txt 同上 
+date >> 1.txt 2>> 2.txt （将正确和错误的输出分别保存）
+
+
+cat <<-EOF
+		EOF (多行输入)
+
+
+7.管道。前一个命令作为第二个命令的输入  |
+|tee a.txt (将管道中的信息输入到文本中，并输出到终端)
+|tee -a a.txt(将管道中的信息追加输入到文本中，并输出到终端)
+
+
+
+8.命令排序
+； 不具备逻辑判断
+cd /root;ls
+&& 前一个命令执行成功再执行后一个
+|| 前一个命令执行失败再执行后一个
+
+
+9.通配符
+* 匹配任意多个字符
+? 匹配任意一个字符
+[] 匹配括号中任意一个字符 [a-z] [^a-z](取反) 
+() 在子shell中运行命令
+{} 集合 mkdir {1..6}(1到6)
+\ 转移符
+
+
+
+
+echo输出带有颜色
+echo -e "\e[1;31m aaa"   "\e[0m"(重置颜色 )
+
+pirnt 格式化输出
+
+
+
+
+变量
+特殊变量：
+$0 当前脚本的文件名
+$n 传递给脚本的第几个参数 $1第一个参数  ./1.sh aa bb
+$# 传递给脚本的参数个数
+$* 传递给脚本的所有参数,作为整体输出
+$@ 定义的所有参数，分别输出
+$! 上条命令执行的情况，成功（0）或失败（非0）
+$$ 当前shell进程ID
+
+read -p "adssad" ip    从键盘输入一个值并传给变量ip
+
+

@@ -13,6 +13,12 @@
 设置开机自动挂载：vim /etc/fstab
 U盘挂载：mount -t vfat /dev/sdb1 /mnt/usb
 
+本地挂载光盘yum源：
+添加yum源配置文件：vim /etc/yum.repos.d/xx.repo
+挂载镜像：mkdir /media/cdrom && mount -r /dev/cdrom  /media/cdrom
+加载yum源：yum repolist
+
+
 
 光盘刻录工具：cdrecord
 备份：xfsdump        /       dd if=/etc/passwd of=/tmp/passwd.back
